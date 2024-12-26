@@ -1,4 +1,4 @@
-import { Page } from "@playwright/test";
+import { Page, Expect } from "@playwright/test";
 
 export default class DashBoardPage {
   page: Page;
@@ -12,6 +12,7 @@ export default class DashBoardPage {
   acceptCookies = () =>
     this.page.getByRole("button", { name: "Се согласувам" });
   avatar = () => this.page.getByAltText("Sign-up icon");
+  aleksandarLogedIn = () => this.page.getByText("Aleksandar");
 
   //function
 
@@ -30,4 +31,9 @@ export default class DashBoardPage {
   public async GoTo() {
     await this.page.goto("https://ananas.mk/");
   }
+
+public async AleksandarLogedIn(){
+  await this.aleksandarLogedIn().isEnabled();
+}
+
 }

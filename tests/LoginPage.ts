@@ -10,6 +10,8 @@ export default class LoginPage {
   username = () => this.page.locator("#username");
   password = () => this.page.locator("#password");
   submitLogin = () => this.page.locator("#login-submit");
+  invalidLoginToastMessage = () =>
+    this.page.getByText("Е-поштата или лозинката се неточни.");
 
   // functions
 
@@ -17,5 +19,9 @@ export default class LoginPage {
     await this.username().fill(user);
     await this.password().fill(pass);
     await this.submitLogin().click();
+  }
+
+  public async NotValidLogin() {
+    await this.invalidLoginToastMessage().isEnabled();
   }
 }
