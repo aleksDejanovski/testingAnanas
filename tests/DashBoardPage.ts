@@ -1,4 +1,4 @@
-import { Page, Expect } from "@playwright/test";
+import { Page, Expect, expect } from "@playwright/test";
 
 export default class DashBoardPage {
   page: Page;
@@ -13,6 +13,13 @@ export default class DashBoardPage {
     this.page.getByRole("button", { name: "Се согласувам" });
   avatar = () => this.page.getByAltText("Sign-up icon");
   aleksandarLogedIn = () => this.page.getByText("Aleksandar");
+  searchTextBox = () =>
+    this.page.getByPlaceholder("Внесете термин за пребарување...");
+  clickSearch = () => this.page.getByRole("button", { name: "Search" });
+  testBremenostResults = () =>
+    this.page.getByRole("heading", {
+      name: 'Резултати за "test za bremenost"',
+    });
 
   //function
 
@@ -32,8 +39,16 @@ export default class DashBoardPage {
     await this.page.goto("https://ananas.mk/");
   }
 
-public async AleksandarLogedIn(){
-  await this.aleksandarLogedIn().isEnabled();
-}
+  public async AleksandarLogedIn() {
+    await this.aleksandarLogedIn().isEnabled();
+  }
 
+  public async SearchItem(item: string) {
+    await this.searchTextBox().fill(item);
+    await this.clickSearch();
+  }
+
+  public async ResutsTestBremenost() {
+    await this.testBremenostResults().isEnabled;
+  }
 }
